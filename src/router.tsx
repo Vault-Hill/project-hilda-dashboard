@@ -11,15 +11,14 @@ const RenderRoute = ({
   protectedRoute,
   children,
 }: {
-  protectedRoute: boolean;
+  protectedRoute?: boolean;
   children: React.ReactNode;
 }) => {
   const location = useLocation();
-  const { getItem } = useStorage('local');
+  const { getItem: getAuth } = useStorage('session');
+  const auth = getAuth('auth');
 
   if (protectedRoute) {
-    const auth = getItem('auth');
-
     if (!auth) {
       return <Navigate to='/login' replace state={{ from: location }} />;
     }
@@ -31,7 +30,11 @@ const RenderRoute = ({
 const router = createBrowserRouter([
   {
     path: '/profile',
-    element: <RenderRoute protectedRoute>{<ProfilePage />}</RenderRoute>,
+    element: (
+      <RenderRoute protectedRoute>
+        <ProfilePage />
+      </RenderRoute>
+    ),
   },
   {
     path: '/settings',
@@ -39,7 +42,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <LoginPage />,
+    element: (
+      <RenderRoute>
+        <LoginPage />
+      </RenderRoute>
+    ),
   },
 ]);
 

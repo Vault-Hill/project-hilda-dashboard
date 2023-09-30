@@ -1,6 +1,8 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import { useNavigate } from 'react-router-dom';
 import user from '../assets/user.png';
+import { useStorage } from '../hooks/useStorage';
 import { MenuItem } from '../types';
 
 type Props = {
@@ -12,6 +14,9 @@ function classNames(...classes: string[]) {
 }
 
 const Navbar: React.FC<Props> = ({ menuItems }) => {
+  const navigate = useNavigate();
+  const { removeItem } = useStorage('session');
+
   return (
     <div className='bg-[#ffffff08] h-fit w-full py-5 flex justify-end border-l border-l-[#ffffff08] px-4 row-span-1 col-span-12'>
       <div className='flex gap-1 bg-[#ffffff08] rounded-full items-center'>
@@ -46,17 +51,35 @@ const Navbar: React.FC<Props> = ({ menuItems }) => {
                     {item.map((subItem, index) => {
                       return (
                         <Menu.Item key={index}>
-                          {({ active }) => (
-                            <a
-                              href={subItem.path}
-                              className={classNames(
-                                active ? 'text-yellow-400' : '',
-                                'block px-4 py-2 text-sm',
-                              )}
-                            >
-                              {subItem.title}
-                            </a>
-                          )}
+                          {({ active }) => {
+                            if (subItem.title === 'Sign out') {
+                              return (
+                                <button
+                                  onClick={() => {
+                                    removeItem('auth');
+                                    navigate('/login');
+                                  }}
+                                  className={classNames(
+                                    active ? 'text-yellow-400' : '',
+                                    'block px-4 py-2 text-sm',
+                                  )}
+                                >
+                                  {subItem.title}
+                                </button>
+                              );
+                            }
+                            return (
+                              <a
+                                href={subItem.path}
+                                className={classNames(
+                                  active ? 'text-yellow-400' : '',
+                                  'block px-4 py-2 text-sm',
+                                )}
+                              >
+                                {subItem.title}
+                              </a>
+                            );
+                          }}
                         </Menu.Item>
                       );
                     })}

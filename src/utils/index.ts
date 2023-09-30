@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-prototype-builtins */
 export const isJson = (value: string) => {
   try {
     const res = JSON.parse(value);

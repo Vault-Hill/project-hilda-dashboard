@@ -1,6 +1,8 @@
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import LayoutOne from '../components/LayoutOne';
 import Profile from '../components/Profile';
+import { useStorage } from '../hooks/useStorage';
 import { MenuItem } from '../types';
 
 const menuItems: MenuItem[][] = [
@@ -13,35 +15,36 @@ const menuItems: MenuItem[][] = [
   ],
   [
     {
-      path: '/',
+      path: '/login',
       title: 'Sign out',
     },
   ],
 ];
 
 const ProfilePage = () => {
-  // const { isLoading, error, data } = useQuery({
-  //   queryKey: ['orgData'],
-  //   queryFn: () => fetch(`${import.meta.env.VITE_BASE_URL}/profile`).then((res) => res.json()),
-  // });
+  const navigate = useNavigate();
+  const { getItem: getAuth } = useStorage('session');
+  const auth = getAuth('auth');
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const data = await fetch(`${import.meta.env.VITE_BASE_URL}/profile`).then((res) =>
-  //         res.json(),
-  //       );
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['orgData'],
+    queryFn: () =>
+      fetch(`https://qj7oe1t9ek.execute-api.us-east-1.amazonaws.com/profile`, {
+        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${auth?.accessToken}`,
+        },
+      }).then((res) => res.json()),
+    retry: false,
+  });
 
-  //   fetchData();
-  // }, []);
+  if (isLoading) return <div>Loading...</div>;
+
+  if (error) navigate('/login');
+
   return (
     <>
-      <LayoutOne menuItems={menuItems} main={<Profile />} />
+      <LayoutOne menuItems={menuItems} main={<Profile data={data.organization} />} />
     </>
   );
 };
