@@ -2,6 +2,7 @@
 import { lazy } from 'react';
 import { Navigate, createBrowserRouter, useLocation } from 'react-router-dom';
 import { useStorage } from './hooks/useStorage';
+import SettingsPage from './pages/SettingsPage';
 
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: '/profile',
     element: <RenderRoute protectedRoute>{<ProfilePage />}</RenderRoute>,
+  },
+  {
+    path: '/settings',
+    element: <RenderRoute >{<SettingsPage />}</RenderRoute>,
   },
   {
     path: '/login',
