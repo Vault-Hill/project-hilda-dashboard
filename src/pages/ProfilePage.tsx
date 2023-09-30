@@ -1,3 +1,4 @@
+import React from 'react';
 import LayoutOne from '../components/LayoutOne';
 import Profile from '../components/Profile';
 import { MenuItem } from '../types';
