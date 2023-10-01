@@ -32,6 +32,7 @@ const Profile: React.FC<Props> = ({ data }) => {
   });
 
   const queryClient = new QueryClient();
+  
   const mutation = useMutation(updateProfile, {
     onSuccess: () => {
       queryClient.invalidateQueries(['orgData']);

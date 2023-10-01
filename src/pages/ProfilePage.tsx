@@ -1,16 +1,17 @@
+import { Cog8ToothIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LayoutOne from '../components/LayoutOne';
 import Profile from '../components/Profile';
 import { useStorage } from '../hooks/useStorage';
-import { MenuItem } from '../types';
+import { MenuItem, NavItem } from '../types';
 
 const menuItems: MenuItem[][] = [
   [
     {
-      path: '/',
-      title: 'Home',
-      active: true,
+      path: '/settings',
+      title: 'Settings',
     },
   ],
   [
@@ -21,12 +22,27 @@ const menuItems: MenuItem[][] = [
   ],
 ];
 
+const navItems: NavItem[] = [
+  {
+    title: 'Profile',
+    path: '/profile',
+    active: true,
+    icon: UserCircleIcon,
+  },
+  {
+    title: 'Settings',
+    path: '/settings',
+
+    icon: Cog8ToothIcon,
+  },
+];
+
 const ProfilePage = () => {
   const navigate = useNavigate();
   const { getItem: getAuth } = useStorage('session');
   const auth = getAuth('auth');
 
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data, refetch } = useQuery({
     queryKey: ['orgData'],
     queryFn: () =>
       fetch(`https://qj7oe1t9ek.execute-api.us-east-1.amazonaws.com/profile`, {
@@ -35,8 +51,13 @@ const ProfilePage = () => {
           Authorization: `Bearer ${auth?.accessToken}`,
         },
       }).then((res) => res.json()),
-    retry: false,
+    refetchOnWindowFocus: false,
+    enabled: false,
   });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -44,7 +65,11 @@ const ProfilePage = () => {
 
   return (
     <>
-      <LayoutOne menuItems={menuItems} main={<Profile data={data.organization} />} />
+      <LayoutOne
+        menuItems={menuItems}
+        navItems={navItems}
+        main={<Profile data={data.organization} />}
+      />
     </>
   );
 };
