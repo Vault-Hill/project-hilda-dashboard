@@ -1,5 +1,5 @@
 export const updateProfile = async (data: { knowledgeBase: string; token?: string }) => {
-  const response = await fetch(`https://qj7oe1t9ek.execute-api.us-east-1.amazonaws.com/profile`, {
+  const response = await fetch(`${import.meta.env.VITE_BASE_URL}/profile`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

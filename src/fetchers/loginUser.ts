@@ -1,5 +1,5 @@
 export const loginUser = async (data: { email: string; password: string }) => {
-  const response = await fetch(`https://qj7oe1t9ek.execute-api.us-east-1.amazonaws.com/login`, {
+  const response = await fetch(`${import.meta.env.VITE_BASE_URL}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

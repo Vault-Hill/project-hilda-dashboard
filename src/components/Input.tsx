@@ -31,27 +31,18 @@ const Input: React.FC<InputProps> = ({
 
   const hasError = !!errors?.[name] && isTouched;
 
-  const wrapperClasses = cx(className, [
-    'relative',
-    'w-full',
-    'flex',
-    'flex-col',
-    'text-neutral-300',
-  ]);
+  const wrapperClasses = cx(['relative', 'w-full', 'flex', 'flex-col', 'text-neutral-300']);
   const inputClasses = cx(
+    className,
     [
       'rounded',
       'p-3',
       'outline-0',
       'focus:ring-0',
-      'disabled:opacity-50',
-      'placeholder-neutral-600',
-      'bg-[#0F0F0F]',
+      'disabled:opacity-50'
     ],
     {
       'border-red-300 focus:border-red-500': hasError,
-      'focus:border-skin-focus': !hasError,
-      'focus:border-skin-base': readOnly,
     },
   );
 
@@ -71,7 +62,7 @@ const Input: React.FC<InputProps> = ({
         className={inputClasses}
       />
       {hasError && (
-        <div className='mb-1 text-sm text-skin-error'>{errors[name]?.message as string}</div>
+        <div className='mb-1 text-sm text-red-400'>{errors[name]?.message as string}</div>
       )}
     </div>
   );

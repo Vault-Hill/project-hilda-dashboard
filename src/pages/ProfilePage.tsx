@@ -45,7 +45,7 @@ const ProfilePage = () => {
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: ['orgData'],
     queryFn: () =>
-      fetch(`https://qj7oe1t9ek.execute-api.us-east-1.amazonaws.com/profile`, {
+      fetch(`${import.meta.env.VITE_BASE_URL}/profile`, {
         credentials: 'include',
         headers: {
           Authorization: `Bearer ${auth?.accessToken}`,

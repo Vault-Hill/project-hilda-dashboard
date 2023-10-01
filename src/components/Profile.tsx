@@ -1,5 +1,4 @@
 import { QueryClient, useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { updateProfile } from '../fetchers/updateProfile';
 import { useStorage } from '../hooks/useStorage';
@@ -17,7 +16,6 @@ type Props = {
 };
 
 const Profile: React.FC<Props> = ({ data }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { getItem: getAuth } = useStorage('session');
   const auth = getAuth('auth');
 
@@ -32,7 +30,7 @@ const Profile: React.FC<Props> = ({ data }) => {
   });
 
   const queryClient = new QueryClient();
-  
+
   const mutation = useMutation(updateProfile, {
     onSuccess: () => {
       queryClient.invalidateQueries(['orgData']);
@@ -40,39 +38,43 @@ const Profile: React.FC<Props> = ({ data }) => {
   });
 
   const onSubmit = methods.handleSubmit((data) => {
-    setIsSubmitting(true);
     mutation.mutate({ knowledgeBase: data.knowledgeBase, token: auth?.accessToken });
-    setIsSubmitting(false);
   });
 
   const canSave = data?.knowledgeBase !== methods.getValues('knowledgeBase');
+
   return (
     <div className='text-[#757575] max-w-3xl'>
       <Avatar />
 
       <FormProvider {...methods}>
         <form className='space-y-7 border-t border-neutral-700 pt-7'>
-          <fieldset className='space-y-7' disabled={isSubmitting}>
+          <fieldset className='space-y-7' disabled={methods.formState.isSubmitting}>
             <Input
               name='orgName'
               label='Company Name'
               type='text'
               placeholder='Alpha Company'
               readOnly
+              className='bg-[#0F0F0F]'
             />
+            
             <Input
               name='email'
               label='Email'
               type='text'
               placeholder='example@gmail.com'
               readOnly
+              className='bg-[#0F0F0F]'
             />
+
             <Input
               name='agentName'
               label='Agent Name'
               type='text'
               placeholder='James Bond'
               readOnly
+              className='bg-[#0F0F0F]'
             />
             <TextArea name='knowledgeBase' label='Knowledge Base' spellCheck='false' />
           </fieldset>

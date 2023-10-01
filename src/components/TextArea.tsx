@@ -30,7 +30,7 @@ const TextArea: React.FC<TextAreaProps> = ({
 
   const hasError = !!errors?.[name] && isTouched;
 
-  const wrapperClasses = cx(className, [
+  const wrapperClasses = cx([
     'relative',
     'w-full',
     'flex',
@@ -40,7 +40,16 @@ const TextArea: React.FC<TextAreaProps> = ({
   ]);
 
   const textareaClasses = cx(
-    ['rounded', 'p-3', 'focus:outline-0', 'focus:ring-0', 'disabled:opacity-50', 'bg-[#0F0F0F]', 'h-40'],
+    className,
+    [
+      'rounded',
+      'p-3',
+      'focus:outline-0',
+      'focus:ring-0',
+      'disabled:opacity-50',
+      'bg-[#0F0F0F]',
+      'h-40',
+    ],
     {
       'border-red-300 focus:border-skin-error': hasError,
       'focus:border-skin-focus': !hasError,

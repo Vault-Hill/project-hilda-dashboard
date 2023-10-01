@@ -1,4 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Ethereum } from '@thirdweb-dev/chains';
+import { ThirdwebProvider } from '@thirdweb-dev/react';
 import { Suspense, useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { AuthContext } from './contexts/auth.context';
@@ -15,9 +17,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthContext.Provider value={isAuth}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <RouterProvider router={router} />
-        </Suspense>
+        <ThirdwebProvider activeChain={Ethereum} clientId={import.meta.env.VITE_CLIENT_ID}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <RouterProvider router={router} />
+          </Suspense>
+        </ThirdwebProvider>
       </AuthContext.Provider>
     </QueryClientProvider>
   );

@@ -1,19 +1,30 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from '@tanstack/react-query';
 import React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { FormProvider, useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import * as yup from 'yup';
+
 import { loginUser } from '../fetchers/loginUser';
 import { useStorage } from '../hooks/useStorage';
+import Input from './Input';
 
-type LoginInputs = {
-  email: string;
-  password: string;
-};
+const schema = yup.object().shape({
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().required('Password is required'),
+});
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const { setItem: setAuth } = useStorage('session');
-  const { handleSubmit, register } = useForm<LoginInputs>();
+  const methods = useForm({
+    resolver: yupResolver(schema),
+    mode: 'onBlur',
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
   const mutation = useMutation(loginUser, {
     onSuccess: (data) => {
@@ -24,44 +35,54 @@ const Login: React.FC = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
+  const onSubmit = methods.handleSubmit((data) => {
     mutation.mutate(data);
-  };
+  });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='w-[70%]'>
-      <div className='mb-8'>
-        <p className='text-3xl font-bold'>Welcome Back!</p>
-        <p className='text-[13px] text-[#7D7878]'>Login to manage your account</p>
-      </div>
+    <FormProvider {...methods}>
+      <form className='max-w-xl mx-auto mt-20'>
+        <div className='mb-8'>
+          <p className='text-3xl font-bold'>Welcome Back!</p>
+          <p className='text-[13px] text-[#7D7878]'>Login to manage your account</p>
+        </div>
 
-      <div className='flex flex-col gap-1 mb-4 w-[70%]'>
-        <label className='text-[12px] text-[#7D7878]'>Email</label>
-        <input {...register('email', { required: true })} className='px-5 py-2 rounded-lg' />
-      </div>
+        <fieldset disabled={methods.formState.isSubmitting}>
+          <Input
+            required
+            name='email'
+            label='Email'
+            type='text'
+            placeholder='example@gmail.com'
+            className='text-black'
+          />
+          <Input
+            required
+            name='password'
+            label='Password'
+            type='password'
+            placeholder='********'
+            className='text-black'
+          />
+        </fieldset>
 
-      <div className='flex flex-col gap-1 mb-4 w-[70%]'>
-        <label className='text-[12px] text-[#7D7878]'>Password</label>
-        <input
-          {...register('password', { required: true })}
-          type='password'
-          className='px-5 py-2 rounded-lg'
-        />
-      </div>
-      {/* <div className="flex gap-2 text-[14px] font-semibold">
-        <input type="checkbox" name="" id="" className="new-check" />
-        <div className="checkmark"></div>
-        <p>Remember Information.</p>
-      </div> */}
-      <button
-        type='submit'
-        disabled={mutation.isLoading}
-        className='w-[70%] bg-[#FFDA4C] font-bold py-2 my-4 rounded-lg'
-      >
-        {mutation.isLoading ? 'Logging in...' : 'Login'}
-      </button>
-      {/* <p>Don't have an account? <Link to='/' className="underline"> Sign Up</Link></p> */}
-    </form>
+        <button
+          type='submit'
+          onClick={onSubmit}
+          disabled={mutation.isLoading}
+          className='w-full bg-[#FFDA4C] font-bold py-2 my-4 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed'
+        >
+          {mutation.isLoading ? 'Logging in...' : 'Login'}
+        </button>
+        <p className='text-center'>
+          Don't have an account?{' '}
+          <Link to='/onboarding' className='underline'>
+            {' '}
+            Sign Up
+          </Link>
+        </p>
+      </form>
+    </FormProvider>
   );
 };
 

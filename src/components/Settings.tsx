@@ -10,7 +10,7 @@ const Settings = () => {
   const { isFetching, data, refetch } = useQuery({
     queryKey: ['accKey'],
     queryFn: () =>
-      fetch(`https://qj7oe1t9ek.execute-api.us-east-1.amazonaws.com/access-key`, {
+      fetch(`${import.meta.env.VITE_BASE_URL}/access-key`, {
         credentials: 'include',
         headers: {
           Authorization: `Bearer ${auth?.accessToken}`,

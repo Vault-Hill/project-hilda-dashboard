@@ -2,10 +2,12 @@
 import { lazy } from 'react';
 import { Navigate, createBrowserRouter, useLocation } from 'react-router-dom';
 import { useStorage } from './hooks/useStorage';
-import SettingsPage from './pages/SettingsPage';
 
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+const SettingsPage = lazy(() => import('./pages/SettingsPage'));
+const OnboardingPage = lazy(() => import('./pages/OnboardingPage'));
 
 const RenderRoute = ({
   protectedRoute,
@@ -38,7 +40,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/settings',
-    element: <RenderRoute >{<SettingsPage />}</RenderRoute>,
+    element: (
+      <RenderRoute protectedRoute>
+        <SettingsPage />
+      </RenderRoute>
+    ),
   },
   {
     path: '/login',
@@ -47,6 +53,26 @@ const router = createBrowserRouter([
         <LoginPage />
       </RenderRoute>
     ),
+  },
+  {
+    path: '/onboarding',
+    element: (
+      <RenderRoute>
+        <OnboardingPage />
+      </RenderRoute>
+    ),
+  },
+  {
+    path: '/',
+    element: (
+      <RenderRoute>
+        <LandingPage />
+      </RenderRoute>
+    )
+  },
+  {
+    path: '*',
+    element: <Navigate to='/profile' replace />,
   },
 ]);
 
