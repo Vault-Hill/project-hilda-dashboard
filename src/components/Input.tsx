@@ -19,7 +19,6 @@ const Input: React.FC<InputProps> = ({
   type,
   label,
   required,
-  optional,
   validation,
   readOnly,
   className,

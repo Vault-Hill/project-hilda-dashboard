@@ -1,17 +1,18 @@
-import { MenuItem } from '../types';
+import { MenuItem, NavItem } from '../types';
 import Navbar from './Navbar';
 import SideNav from './Sidebar';
 
 type Props = {
   menuItems: MenuItem[][];
+  navItems?: NavItem[];
   main: React.ReactNode;
 };
 
-const LayoutOne: React.FC<Props> = ({ main, menuItems }) => {
+const LayoutOne: React.FC<Props> = ({ main, menuItems, navItems }) => {
   return (
     <>
       <div className='grid grid-rows-7 grid-flow-col bg-[#090909] h-[100vh] relative overflow-auto'>
-        <SideNav />
+        <SideNav navItems={navItems} />
         <Navbar menuItems={menuItems} />
         <div className='row-span-2 col-span-12 overflow-y-auto overflow-x-hidden pl-32'>{main}</div>
       </div>

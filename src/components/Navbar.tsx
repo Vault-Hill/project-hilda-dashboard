@@ -41,10 +41,6 @@ const Navbar: React.FC<Props> = ({ menuItems }) => {
             leaveTo='transform opacity-0 scale-95'
           >
             <Menu.Items className='absolute right-0 z-10 mt-7 w-56 origin-top-right divide-y text-neutral-400 divide-neutral-700 rounded-md bg-[#ffffff08] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
-              <div className='px-4 py-3'>
-                <p className='text-sm'>Signed in as</p>
-                <p className='truncate text-sm font-medium'>tom@example.com</p>
-              </div>
               {menuItems.map((item, index) => {
                 return (
                   <div className='py-1' key={index}>
