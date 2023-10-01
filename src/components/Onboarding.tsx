@@ -37,6 +37,9 @@ const Onboarding = () => {
 
   const { tokenIds, getToken } = useTokenBalance(tokenBalance as unknown as Token[]);
 
+  console.log('Token IDs', tokenIds);
+  console.log();
+
   const [notConnectedError, setNotConnectedError] = useState('');
   const [noTokenError, setNoTokenError] = useState('');
 
@@ -130,9 +133,9 @@ const Onboarding = () => {
             name='tokenId'
             label='Token ID (VH Brain)'
             placeholder='Select a Brain'
-            options={tokenIds.map((tokenId) => ({
-              label: getToken(tokenId)!.label,
-              value: tokenId,
+            options={tokenIds.map((tokenId: string) => ({
+              label: getToken(tokenId)?.label ?? '',
+              value: tokenId ?? '',
             }))}
             error={noTokenError}
             className='text-black'

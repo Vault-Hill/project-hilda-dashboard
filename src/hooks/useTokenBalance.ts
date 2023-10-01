@@ -13,17 +13,31 @@ export type Token = {
 };
 
 const useTokenBalance = (balance: Token[] = []) => {
-  const tokenIds = balance.map((token) => token.metadata.id);
-  const tokens = balance.map((token) => ({
-    tokenId: token.metadata.id,
-    district: token.metadata.traits[0].value,
-    label: `${token.metadata.name} of ${token.metadata.traits[0].value} district`
-  }));
+  console.log('Balances', balance);
 
   const getToken = (tokenId: string) => {
-    const token = tokens.find((token) => token.tokenId === tokenId);
-    return token
+    if (!tokenId) {
+      return { label: '', district: '', tokenId: '' };
+    } else {
+      return tokens.find((token) => token.tokenId === tokenId);
+    }
   };
+
+  if (!balance || balance.length === 0) return {
+    tokenIds: [],
+    tokens: [],
+    getToken,
+  };
+
+  const tokenIds = [] as string[];
+  const tokens = balance.map((token) => {
+    tokenIds.push(token.metadata.id);
+    return {
+      label: token.metadata.name,
+      district: token.metadata.traits[0].value,
+      tokenId: token.metadata.id,
+    };
+  });
 
   return { tokenIds, tokens, getToken };
 };
