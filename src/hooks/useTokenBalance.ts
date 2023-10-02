@@ -12,7 +12,7 @@ export type Token = {
   };
 };
 
-const useTokenBalance = (balance: Token[] = []) => {
+export const useTokenBalance = (balance: Token[] = []) => {
   console.log('Balances', balance);
 
   const getToken = (tokenId: string) => {
@@ -23,11 +23,12 @@ const useTokenBalance = (balance: Token[] = []) => {
     }
   };
 
-  if (!balance || balance.length === 0) return {
-    tokenIds: [],
-    tokens: [],
-    getToken,
-  };
+  if (!balance || balance.length === 0)
+    return {
+      tokenIds: [],
+      tokens: [],
+      getToken,
+    };
 
   const tokenIds = [] as string[];
   const tokens = balance.map((token) => {
@@ -42,4 +43,12 @@ const useTokenBalance = (balance: Token[] = []) => {
   return { tokenIds, tokens, getToken };
 };
 
-export default useTokenBalance;
+export const useTokenBalance2 = (balance: Token[] = []) => {
+  if (!balance || balance.length === 0) {
+    return { tokenIds: [] };
+  }
+
+  const tokenIds = balance.map((token) => token.metadata.id);
+
+  return { tokenIds };
+};

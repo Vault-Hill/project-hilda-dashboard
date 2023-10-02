@@ -11,7 +11,7 @@ const queryClient = new QueryClient();
 
 function App() {
   const { getItem } = useStorage('session');
-  const authState = getItem('auth');
+const authState = getItem('auth');
   const [isAuth] = useState(!!authState);
 
   return (

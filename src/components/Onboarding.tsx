@@ -7,10 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { onboarding } from '../fetchers/onboarding';
 import { useStorage } from '../hooks/useStorage';
-import useTokenBalance, { Token } from '../hooks/useTokenBalance';
+import { Token, useTokenBalance2 } from '../hooks/useTokenBalance';
 import Input from './Input';
 import Select from './Select';
-import TextArea from './TextArea';
 
 const schema = yup.object().shape({
   tokenId: yup.string().required('Token ID is required'),
@@ -35,10 +34,7 @@ const Onboarding = () => {
   );
   const { data: tokenBalance, isLoading } = useOwnedNFTs(tokenContract, address);
 
-  const { tokenIds, getToken } = useTokenBalance(tokenBalance as unknown as Token[]);
-
-  console.log('Token IDs', tokenIds);
-  console.log();
+  const { tokenIds } = useTokenBalance2(tokenBalance as unknown as Token[]);
 
   const [notConnectedError, setNotConnectedError] = useState('');
   const [noTokenError, setNoTokenError] = useState('');
@@ -134,7 +130,7 @@ const Onboarding = () => {
             label='Token ID (VH Brain)'
             placeholder='Select a Brain'
             options={tokenIds.map((tokenId: string) => ({
-              label: getToken(tokenId)?.label ?? '',
+              label: tokenId ? `VH Brain #${tokenId}` : '',
               value: tokenId ?? '',
             }))}
             error={noTokenError}
@@ -155,12 +151,6 @@ const Onboarding = () => {
             type='text'
             placeholder='James Bond'
             className='text-black'
-          />
-          <TextArea
-            name='knowledgeBase'
-            label='Knowledge Base'
-            placeholder='Provide some instructions for your agent (max 120 characters)'
-            className='placeholder:font-mono text-xs resize-none text-white'
           />
           <Input
             required
