@@ -1,6 +1,6 @@
-import { cx } from 'class-variance-authority';
-import { RegisterOptions, useFormContext } from 'react-hook-form';
-import Label from './Label';
+import { cx } from "class-variance-authority";
+import { RegisterOptions, useFormContext } from "react-hook-form";
+import Label from "./Label";
 
 export type SelectOption = {
   label: string;
@@ -16,7 +16,7 @@ type SelectProps = {
   validation?: RegisterOptions;
   detached?: boolean;
   error?: string;
-} & React.ComponentProps<'select'>;
+} & React.ComponentProps<"select">;
 
 const Select: React.FC<SelectProps> = ({
   name,
@@ -27,7 +27,7 @@ const Select: React.FC<SelectProps> = ({
   validation,
   className,
   detached,
-  error = '',
+  error = "",
   ...props
 }) => {
   const { register, formState } = useFormContext() ?? {};
@@ -36,13 +36,29 @@ const Select: React.FC<SelectProps> = ({
 
   const hasError = (!!errors?.[name] && isTouched) || !!error;
 
-  const wrapperClasses = cx(['relative', 'w-full', 'flex', 'flex-col', 'text-skin-base']);
+  const wrapperClasses = cx([
+    "relative",
+    "w-full",
+    "flex",
+    "flex-col",
+    "text-skin-base",
+  ]);
   const inputClasses = cx(
     className,
-    ['rounded', 'p-3', 'shadow-sm', 'focus:outline-0', 'focus:ring-0', 'disabled:opacity-50'],
+    [
+      "rounded",
+      "px-3 py-5",
+      "shadow-sm",
+      "focus:outline-0",
+      "focus:ring-0",
+      "disabled:opacity-50",
+      "bg-[#0D0D0D]",
+      'mb-3',
+      "border-[0.5px] border-[#262626]",
+    ],
     {
-      'border-red-300 focus:border-red-500': hasError,
-    },
+      "border-red-300 focus:border-red-500": hasError,
+    }
   );
 
   return (
@@ -58,7 +74,7 @@ const Select: React.FC<SelectProps> = ({
         {...props}
         className={inputClasses}
       >
-        <option value='' disabled className='text-gray-400'>
+        <option value="" disabled className="text-gray-400">
           {placeholder ?? `Select ${label?.toLowerCase()}`}
         </option>
         {options.map((option, index) => (
@@ -68,7 +84,7 @@ const Select: React.FC<SelectProps> = ({
         ))}
       </select>
       {hasError && (
-        <div className='mb-1 text-sm text-red-400'>
+        <div className="mb-1 text-sm text-red-400">
           {(errors?.[name]?.message as string) ?? error}
         </div>
       )}

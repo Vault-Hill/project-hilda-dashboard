@@ -36,10 +36,13 @@ const Input: React.FC<InputProps> = ({
     className,
     [
       'rounded',
-      'p-3',
+      'px-3 py-5',
       'outline-0',
       'focus:ring-0',
-      'disabled:opacity-50'
+      'disabled:opacity-50',
+      'bg-[#0D0D0D]',
+      'border-[0.5px] border-[#262626]',
+      'text-white',
     ],
     {
       'border-red-300 focus:border-red-500': hasError,
