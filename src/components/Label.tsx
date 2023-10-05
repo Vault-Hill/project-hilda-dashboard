@@ -8,9 +8,9 @@ type LabelProps = {
 
 export const Label: React.FC<LabelProps> = ({ name, required, readOnly, children }) => {
   return (
-    <div className='flex justify-between text-neutral-500'>
+    <div className='flex justify-between text-neutral-500 text-[12px]'>
       <label htmlFor={name} className='mb-2 flex font-medium'>
-        {children}:{required && <span className='text-red-500'>*</span>}
+        {children}:{required && <span>*</span>}
       </label>
       {readOnly && <span className='text-sm text-neutral-700'>[Read Only]</span>}
     </div>

@@ -6,6 +6,7 @@ import { RouterProvider } from 'react-router-dom';
 import { AuthContext } from './contexts/auth.context';
 import { useStorage } from './hooks/useStorage';
 import router from './router';
+import Loader from './components/Loader';
 
 const queryClient = new QueryClient();
 
@@ -18,7 +19,7 @@ const authState = getItem('auth');
     <QueryClientProvider client={queryClient}>
       <AuthContext.Provider value={isAuth}>
         <ThirdwebProvider activeChain={Ethereum} clientId={import.meta.env.VITE_CLIENT_ID}>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader/>}>
             <RouterProvider router={router} />
           </Suspense>
         </ThirdwebProvider>
