@@ -15,6 +15,7 @@ import { useStorage } from "../hooks/useStorage";
 import Input from "./Input";
 import { useTokenBalance2, Token } from "../hooks/useTokenBalance";
 import Select from "./Select";
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
 const schema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -46,8 +47,7 @@ const Login: React.FC = () => {
     mutation.mutate(data);
   });
   const address = useAddress();
-  const { getItem: getAuth } = useStorage("session");
-  const auth = getAuth("auth");
+
   const { contract: tokenContract } = useContract(
     import.meta.env.VITE_CONTRACT_ADDRESS,
     "nft-collection"
@@ -82,9 +82,11 @@ const Login: React.FC = () => {
 
   return (
     <FormProvider {...methods}>
-      <form className="max-w-xl mx-auto my-20 flex flex-col gap-5 text-gray-500">
+      <form className="max-w-xl w-full mx-auto my-20 flex flex-col gap-5 text-gray-500">
         <div className="mb-10">
-          <p className="gradient-text text-4xl font-bold w-fit">Sign In</p>
+          <p className="gradient-text text-4xl font-bold w-fit prototype">
+            Sign In
+          </p>
           <p className="text-[12px]">
             already have an account?{" "}
             <Link to="/" className="underline">
@@ -92,31 +94,38 @@ const Login: React.FC = () => {
             </Link>
           </p>
         </div>
-        <div className="text-center border-sky-500 bg-[#0D0D0D] py-5 text-white rounded-full flex gap-5 justify-center">
-          🧠{" "}
-          <a
-            href="https://opensea.io/collection/god-hates-ai"
-            className="hover:underline"
-            target="_blank"
-          >
-            Buy VH Brain Now on Opensea
-          </a>{" "}
-          🎉
-        </div>
-        {notConnectedError && (
-          <div className="mb-5 space-y-3 border-b-[0.5px] border-b-[#262626] ">
-            <p className="text-center text-red-400">{notConnectedError}!</p>
-            <ConnectWallet className="!mx-auto !mb-5 !w-full bg-slate-900 !py-5 text-sm uppercase gradient dark:bg-opacity-10 dark:!text-white !rounded-full" />
+        <div className="flex flex-col gap-3">
+          <div className="text-center  dark:bg-[#0D0D0D] bg-white py-2 dark:text-white text-[#0D0D0D] rounded-full flex gap-5 justify-center text-[24px]">
+            🧠{" "}
+            <a
+              href="https://opensea.io/collection/god-hates-ai"
+              className="underline text-[18px]"
+              target="_blank"
+            >
+              Buy VH Brain Now on Opensea
+            </a>{" "}
+            🎉
           </div>
-        )}
-        {isLoading && address && (
-          <p className="text-black font-bold">
-            Checking your wallet balance...
-          </p>
-        )}
-       
+          {notConnectedError && (
+            <div className="mb-5 pb-5 border-b-[0.5px] border-b-[#26262630] dark:border-b-[#ffffff20] ">
+              <ConnectWallet className="!mx-auto !mb-2 !w-full bg-slate-900 !py-5 text-sm uppercase gradient dark:bg-opacity-10 !text-white !rounded-full" />
+              <p className="text-center text-neutral-500 text-[12px] font-bold flex items-center justify-center gap-2">
+                <ExclamationCircleIcon className="h-5 w-5" />
+                {notConnectedError}!
+              </p>
+            </div>
+          )}
+          {isLoading && address && (
+            <p className="text-black font-bold">
+              Checking your wallet balance...
+            </p>
+          )}
+        </div>
 
-        <fieldset disabled={methods.formState.isSubmitting} className="flex flex-col gap-5">
+        <fieldset
+          disabled={methods.formState.isSubmitting}
+          className="flex flex-col gap-5"
+        >
           <Select
             required
             name="tokenId"

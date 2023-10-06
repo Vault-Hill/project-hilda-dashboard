@@ -33,7 +33,7 @@ const navItems: NavItem[] = [
 ];
 
 const SettingsPage = () => {
-  return <LayoutOne menuItems={menuItems} navItems={navItems} main={<Settings />} />;
+  return <LayoutOne menuItems={menuItems} navItems={navItems} title='Access Key' main={<Settings />} />;
 };
 
 export default SettingsPage;

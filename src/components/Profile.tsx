@@ -15,7 +15,7 @@ type Props = {
   };
 };
 
-const Profile: React.FC<Props> = ({ data }) => {
+const Profile: React.FC<Props> = ({data}) => {
   const { getItem: getAuth } = useStorage('session');
   const auth = getAuth('auth');
 
@@ -45,10 +45,11 @@ const Profile: React.FC<Props> = ({ data }) => {
 
   return (
     <div className='text-[#757575] max-w-3xl'>
+     
       <Avatar />
 
       <FormProvider {...methods}>
-        <form className='space-y-7 border-t border-neutral-700 pt-7'>
+        <form className='space-y-7 border-t dark:border-neutral-700 border-neutral-200 pt-7'>
           <fieldset className='space-y-7' disabled={methods.formState.isSubmitting}>
             <Input
               name='orgName'
@@ -80,7 +81,7 @@ const Profile: React.FC<Props> = ({ data }) => {
           </fieldset>
 
           <button
-            className='bg-sky-500 px-10 py-2 rounded-md text-black disabled:opacity-50 disabled:cursor-not-allowed'
+            className='bg-[#47E2BD] px-10 py-2 rounded-md text-black disabled:opacity-50 disabled:cursor-not-allowed'
             type='submit'
             onClick={onSubmit}
             disabled={!canSave}

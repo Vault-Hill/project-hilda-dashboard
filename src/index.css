@@ -7,6 +7,19 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: 'Prototype';
+  src: local('Prototype'), url(./assets/Prototype.ttf) format('truetype');
+}
+
+.prototype{
+  font-family: 'Prototype';
+}
+
+*[class*='dark'] {
+  transition: 0.4s;
+}
 ::-webkit-scrollbar {
   width: 10px;
 }

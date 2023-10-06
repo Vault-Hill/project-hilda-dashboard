@@ -6,14 +6,14 @@ type Props = {
 };
 const SideNav: React.FC<Props> = ({ navItems }) => {
   return (
-    <div className='bg-[#ffffff08] px-16 h-full row-span-3'>
-      <p className='py-7 text-2xl text-white mb-7'>Hilda</p>
+    <div className='dark:bg-[#0D0D0D] bg-[#F0F0F0] px-16 md:h-full row-span-3 py-5 fixed w-full md:w-auto bottom-0  z-50 md:relative'>
+      <p className='py-7 text-2xl dark:text-white text-black mb-7 md:block hidden'>Hilda</p>
 
-      <nav className='flex flex-col gap-5 text-neutral-400'>
+      <nav className='flex md:flex-col justify-around md:justify-normal gap-5 dark:text-neutral-400 text-neutral-600'>
         {navItems?.map((item, index) => (
           <a key={index} href={item.path}>
-            <div className={cx('flex gap-3 items-center', { 'text-amber-300': item.active })}>
-              <item.icon className='h-6 w-6' />
+            <div className={cx('flex flex-col md:flex-row md:gap-3 gap-1 items-center', { 'gradient-text': item.active })}>
+              <item.icon className='h-6 w-6 gradient-text' />
               <p className='text-lg'>{item.title}</p>
             </div>
           </a>

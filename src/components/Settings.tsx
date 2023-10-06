@@ -21,9 +21,8 @@ const Settings = () => {
   });
 
   return (
-    <div>
       <div className='flex flex-col gap-5'>
-        <p className='text-4xl text-white mb-5 pt-16 font-bold'>Access Key</p>
+        {/* <p className='text-4xl dark:text-white text-black mb-5 pt-16 font-bold'>Access Key</p> */}
         <TextArea
           name='accessKey'
           label='Access Key'
@@ -40,7 +39,6 @@ const Settings = () => {
           {isFetching ? 'Generating...' : 'Generate Access Key'}
         </button>
       </div>
-    </div>
   );
 };
 
