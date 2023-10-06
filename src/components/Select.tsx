@@ -52,9 +52,9 @@ const Select: React.FC<SelectProps> = ({
       "focus:outline-0",
       "focus:ring-0",
       "disabled:opacity-50",
-      "bg-[#0D0D0D]",
-      'mb-3',
-      "border-[0.5px] border-[#262626]",
+      "dark:bg-[#0D0D0D] bg-white",
+      'mb-3 dark:text-white text-black',
+      "border-[0.5px] dark:border-[#262626] border-[#26262630]",
     ],
     {
       "border-red-300 focus:border-red-500": hasError,

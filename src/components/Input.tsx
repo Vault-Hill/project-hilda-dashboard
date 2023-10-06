@@ -40,8 +40,8 @@ const Input: React.FC<InputProps> = ({
       'outline-0',
       'focus:ring-0',
       'disabled:opacity-50',
-      'bg-[#0D0D0D]',
-      'border-[0.5px] border-[#262626]',
+      'dark:bg-[#0D0D0D] bg-white',
+      'border-[0.5px] dark:border-[#262626] border-[#26262630]',
       'text-white',
     ],
     {

@@ -25,8 +25,8 @@ const Avatar = () => {
   };
 
   return (
-    <div className='relative flex gap-x-5 items-end mb-5'>
-      <div className='relative rounded-full overflow-hidden group'>
+    <div className='relative flex gap-x-5 items-center justify-between md:justify-normal mb-5'>
+      <div className='relative  rounded-full overflow-hidden group'>
         <img
           src={(image as string) || avatar}
           alt='Avatar'
@@ -41,10 +41,10 @@ const Avatar = () => {
           </button>
         )}
       </div>
-      <div className='h-14 space-x-4'>
+      <div className='h-14 relative flex flex-wrap items-center '>
         <label
           htmlFor='fileInput'
-          className='bg-yellow-400 px-8 py-2 rounded-lg text-black cursor-pointer'
+          className='dark:bg-[#0D0D0D] h-fit w-full md:px-8 md:w-fit  text-center py-2 rounded-lg dark:text-white border-[0.5px] dark:border-[#262626] border-[#26262640] cursor-pointer'
         >
           Edit
           <input
@@ -57,7 +57,7 @@ const Avatar = () => {
         </label>
         <button
           onClick={handleUploadClick}
-          className={cx('bg-green-300 px-8 py-1 rounded-lg text-black', {
+          className={cx('bg-red-500  py-2 w-full md:px-8 md:w-fit rounded-lg dark:text-white', {
             'bg-opacity-0 cursor-not-allowed': !image,
           })}
         >
