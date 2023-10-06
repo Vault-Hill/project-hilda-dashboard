@@ -1,4 +1,3 @@
-import React from 'react'
 import sun from "../assets/sun.svg";
 import night from "../assets/night.svg";
 
