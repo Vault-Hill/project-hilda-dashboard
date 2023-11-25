@@ -4,11 +4,12 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useApi from '../api';
 import LayoutOne from '../components/LayoutOne';
 import Loader from '../components/Loader';
 import Report from '../components/Report';
-import { useStorage } from '../hooks/useStorage';
 import { MenuItem, NavItem } from '../types';
 
 const menuItems: MenuItem[][] = [
@@ -47,21 +48,18 @@ const navItems: NavItem[] = [
 
 const ReportPage = () => {
   const navigate = useNavigate();
-  const { getItem: getAuth } = useStorage('session');
-  const auth = getAuth('auth');
+  const { getReports } = useApi();
 
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data, refetch } = useQuery({
     queryKey: ['reports'],
-    queryFn: () =>
-      fetch(`${import.meta.env.VITE_BASE_URL}/reports`, {
-        credentials: 'include',
-        headers: {
-          Authorization: `Bearer ${auth?.accessToken}`,
-        },
-      }).then((res) => res.json()),
+    queryFn: () => getReports(),
     refetchOnWindowFocus: false,
-    enabled: true,
+    enabled: false,
   });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   console.log(data);
 
@@ -71,9 +69,9 @@ const ReportPage = () => {
 
   return (
     <LayoutOne
+      title='Reports'
       menuItems={menuItems}
       navItems={navItems}
-      title='Reports'
       main={<Report data={data} />}
     />
   );

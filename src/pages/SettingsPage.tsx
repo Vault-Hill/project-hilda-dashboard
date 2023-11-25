@@ -1,4 +1,8 @@
-import { Cog8ToothIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import {
+  ClipboardDocumentListIcon,
+  Cog8ToothIcon,
+  UserCircleIcon,
+} from '@heroicons/react/24/outline';
 import LayoutOne from '../components/LayoutOne';
 import Settings from '../components/Settings';
 import { MenuItem, NavItem } from '../types';
@@ -30,10 +34,17 @@ const navItems: NavItem[] = [
     active: true,
     icon: Cog8ToothIcon,
   },
+  {
+    title: 'Reports',
+    path: '/reports',
+    icon: ClipboardDocumentListIcon,
+  },
 ];
 
 const SettingsPage = () => {
-  return <LayoutOne menuItems={menuItems} navItems={navItems} title='Access Key' main={<Settings />} />;
+  return (
+    <LayoutOne menuItems={menuItems} navItems={navItems} title='Access Key' main={<Settings />} />
+  );
 };
 
 export default SettingsPage;
