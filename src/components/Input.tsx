@@ -7,9 +7,9 @@ type InputProps = {
   name: string;
   label?: string;
   required?: boolean;
-  optional?: boolean;
   placeholder?: string;
   type?: 'text' | 'password' | 'number' | 'time' | 'email' | 'hidden';
+  optional?: boolean;
   validation?: RegisterOptions;
   detached?: boolean;
 } & React.ComponentProps<'input'>;

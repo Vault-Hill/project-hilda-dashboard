@@ -3,7 +3,15 @@ import { lazy } from 'react';
 import { Navigate, createBrowserRouter, useLocation } from 'react-router-dom';
 import { useStorage } from './hooks/useStorage';
 
+// import LandingPage from './pages/LandingPage';
+// import LoginPage from './pages/LoginPage';
+// import OnboardingPage from './pages/OnboardingPage';
+// import ProfilePage from './pages/ProfilePage';
+// import ReportPage from './pages/ReportPage';
+// import SettingsPage from './pages/SettingsPage';
+
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const ReportPage = lazy(() => import('./pages/ReportPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
@@ -63,12 +71,20 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: '/reports',
+    element: (
+      <RenderRoute protectedRoute>
+        <ReportPage />
+      </RenderRoute>
+    ),
+  },
+  {
     path: '/',
     element: (
       <RenderRoute>
         <LandingPage />
       </RenderRoute>
-    )
+    ),
   },
   {
     path: '*',

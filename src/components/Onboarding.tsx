@@ -117,7 +117,7 @@ const Onboarding = () => {
           <p className="gradient-text text-4xl font-bold w-fit prototype">Sign Up</p>
           <p className="text-[12px]">
             already have an account?{" "}
-            <Link to="/" className="underline">
+            <Link to="/login" className="underline">
               Sign in
             </Link>
           </p>

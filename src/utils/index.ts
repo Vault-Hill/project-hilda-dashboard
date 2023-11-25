@@ -8,3 +8,7 @@ export const isJson = (value: string) => {
     return false;
   }
 };
+
+export const classNames = (...classes: string[]) => {
+  return classes.filter(Boolean).join(' ');
+};

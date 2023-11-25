@@ -6,7 +6,6 @@ const Settings = () => {
   const { getItem: getAuth } = useStorage('session');
   const auth = getAuth('auth');
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { isFetching, data, refetch } = useQuery({
     queryKey: ['accKey'],
     queryFn: () =>
