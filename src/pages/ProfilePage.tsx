@@ -64,6 +64,8 @@ const ProfilePage = () => {
     enabled: false,
   });
 
+  console.log(data)
+
   useEffect(() => {
     refetch();
   }, [refetch]);
