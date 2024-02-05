@@ -55,7 +55,7 @@ const ProfilePage = () => {
     queryKey: ['orgData'],
     queryFn: () =>
       fetch(`${import.meta.env.VITE_BASE_URL}/profile`, {
-        credentials: 'include',
+        // credentials: 'include',
         headers: {
           Authorization: `Bearer ${auth?.accessToken}`,
         },
@@ -63,8 +63,6 @@ const ProfilePage = () => {
     refetchOnWindowFocus: false,
     enabled: false,
   });
-
-  console.log(data)
 
   useEffect(() => {
     refetch();
@@ -80,7 +78,7 @@ const ProfilePage = () => {
         title='Profile'
         menuItems={menuItems}
         navItems={navItems}
-        main={<Profile data={data.organization} />}
+        main={<Profile data={data.data} />}
       />
     </>
   );

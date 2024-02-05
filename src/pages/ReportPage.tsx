@@ -61,8 +61,6 @@ const ReportPage = () => {
     refetch();
   }, [refetch]);
 
-  console.log(data);
-
   if (isLoading) return <Loader />;
 
   if (error) navigate('/login');

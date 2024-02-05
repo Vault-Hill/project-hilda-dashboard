@@ -14,18 +14,18 @@ export type NavItem = {
 };
 
 export type Session = {
-  id: string;
+  sessionId: string;
   name: string;
   phone: string;
   email: string;
   escalation: string | boolean;
-  sessionStartedAt: number;
-  sessionDuration: number;
-  totalMessages: number;
+  startedAt: number;
+  endedAt: number;
+  messages: Record<string, string>[]
 };
 
 export type ReportDetails = {
-  id: string;
+  sessionId: string;
   name: string;
   phone: string;
   email: string;

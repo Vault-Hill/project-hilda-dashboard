@@ -8,8 +8,8 @@ import TextArea from './TextArea';
 
 type Props = {
   data: {
-    orgName: string;
-    agentName: string;
+    name: string;
+    botName: string;
     email: string;
     knowledgeBase: string;
   };
@@ -22,8 +22,8 @@ const Profile: React.FC<Props> = ({data}) => {
   const methods = useForm({
     mode: 'onBlur',
     defaultValues: {
-      orgName: data?.orgName,
-      agentName: data?.agentName,
+      name: data?.name,
+      botName: data?.botName,
       email: data?.email,
       knowledgeBase: data?.knowledgeBase,
     },
@@ -52,7 +52,7 @@ const Profile: React.FC<Props> = ({data}) => {
         <form className='space-y-7 border-t dark:border-neutral-700 border-neutral-200 pt-7'>
           <fieldset className='space-y-7' disabled={methods.formState.isSubmitting}>
             <Input
-              name='orgName'
+              name='name'
               label='Company Name'
               type='text'
               placeholder='Alpha Company'
@@ -70,7 +70,7 @@ const Profile: React.FC<Props> = ({data}) => {
             />
 
             <Input
-              name='agentName'
+              name='botName'
               label='Agent Name'
               type='text'
               placeholder='James Bond'

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Modal from '.';
-import { ReportDetails, Session } from '../../types';
+import { ReportDetails } from '../../types';
 
 type Props = {
   data: ReportDetails | null;
@@ -9,7 +9,7 @@ type Props = {
 };
 
 type Item = {
-  name: keyof Session;
+  name: keyof ReportDetails;
   label: string;
 };
 
