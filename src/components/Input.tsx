@@ -42,7 +42,7 @@ const Input: React.FC<InputProps> = ({
       'disabled:opacity-50',
       'dark:bg-[#0D0D0D] bg-white',
       'border-[0.5px] dark:border-[#262626] border-[#26262630]',
-      'text-white',
+      'dark:text-white text-black',
     ],
     {
       'border-red-300 focus:border-red-500': hasError,
