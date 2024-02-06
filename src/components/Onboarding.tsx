@@ -82,7 +82,8 @@ const Onboarding = () => {
 
   const canSave = !notConnectedError && !noTokenError;
 
-  const mutation = useMutation(onboarding, {
+  const mutation = useMutation({
+    mutationFn:onboarding,
     onSuccess: () => {
       navigate("/profile");
     },

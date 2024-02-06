@@ -29,15 +29,15 @@ const navItems: NavItem[] = [
     icon: UserCircleIcon,
   },
   {
+    title: 'Reports',
+    path: '/reports',
+    icon: ClipboardDocumentListIcon,
+  },
+  {
     title: 'Settings',
     path: '/settings',
     active: true,
     icon: Cog8ToothIcon,
-  },
-  {
-    title: 'Reports',
-    path: '/reports',
-    icon: ClipboardDocumentListIcon,
   },
 ];
 

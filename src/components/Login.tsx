@@ -25,7 +25,8 @@ const Login: React.FC = () => {
     },
   });
 
-  const mutation = useMutation(loginUser, {
+  const mutation = useMutation({
+    mutationFn: loginUser,
     onSuccess: (data) => {
       if (data.accessToken) {
         setAuth({ auth: data });
@@ -73,10 +74,10 @@ const Login: React.FC = () => {
         <button
           type='submit'
           onClick={onSubmit}
-          disabled={mutation.isLoading}
+          disabled={mutation.isPending}
           className='w-full bg-[#47E2BD] font-bold py-4 mt-7 rounded-full disabled:opacity-40 disabled:cursor-not-allowed'
         >
-          {mutation.isLoading ? 'Logging in...' : 'Login'}
+          {mutation.isPending ? 'Logging in...' : 'Login'}
         </button>
         <p className='text-center'>
           Don't have an account?{' '}

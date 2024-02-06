@@ -27,8 +27,8 @@ const ReportDetailsModal: React.FC<Props> = ({ show = false, setShow, data }) =>
     <div className='space-y-7 p-5'>
       {items.map((item) => (
         <div key={item.name} className='flex justify-between border-b'>
-          <p className='text-gray-500'>{item.label}</p>
-          <p className='text-black'>{data?.[item.name] ?? '---'}</p>
+          <p className='text-gray-500 dark:text-white'>{item.label}</p>
+          <p className='text-black dark:text-white'>{data?.[item.name] ?? '---'}</p>
         </div>
       ))}
     </div>
