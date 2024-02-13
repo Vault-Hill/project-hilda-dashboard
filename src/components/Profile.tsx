@@ -54,7 +54,7 @@ const Profile: React.FC<Props> = ({ data }) => {
 			<Avatar />
 
 			<FormProvider {...methods}>
-				<form className="space-y-7 border-t dark:border-neutral-700 border-neutral-200 pt-7">
+				<form className="space-y-7 py-7">
 					<fieldset
 						className="space-y-7"
 						disabled={methods.formState.isSubmitting}
@@ -93,7 +93,7 @@ const Profile: React.FC<Props> = ({ data }) => {
 					</fieldset>
 
 					<button
-						className="bg-[#47E2BD] px-10 py-2 rounded-md text-black disabled:opacity-50 disabled:cursor-not-allowed"
+						className="px-3 py-2 rounded-md w-fit text-[14px] font-semibold bg-black text-white dark:bg-white dark:text-black"
 						type="submit"
 						onClick={onSubmit}
 						disabled={!canSave}

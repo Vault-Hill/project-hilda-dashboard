@@ -138,7 +138,7 @@ const Report: React.FC<Props> = ({
 									<td className="relative whitespace-nowrap text-center py-4 pl-3 pr-4  text-sm font-medium sm:pr-6 lg:pr-8">
 										<button
 											onClick={() => handleViewReport(report.sessionId)}
-											className="hover:text-gray-600"
+											className="hover:text-gray-600 underline"
 										>
 											View Report
 										</button>
@@ -155,7 +155,7 @@ const Report: React.FC<Props> = ({
 				<div className="flex justify-center mt-10">
 					<button
 						onClick={getMore}
-						className="px-3 py-2 bg-[#FF7E7E] rounded-md w-fit text-[14px] font-semibold text-black"
+						className="px-3 py-2 rounded-md w-fit text-[14px] font-semibold bg-black text-white dark:bg-white dark:text-black"
 					>
 						Load More
 					</button>
