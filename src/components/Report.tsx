@@ -1,16 +1,21 @@
 import { useState } from "react";
 import { Comment } from "react-loader-spinner";
 import useApi from "../api";
-import { ReportDetails, Session } from "../types";
+import { ReportDetails, Session, Chat } from "../types";
 import ReportDetailsModal from "./modals/ReportDetails";
+import ChatDetailsModal from "./modals/ChatDetails";
 
 type Props = {
-	data: { next_page?: number; reports: Session[]; last_page: number;};
+	data: { next_page?: number; reports: Session[]; last_page: number };
 };
 
-const Report: React.FC<Props> = ({ data: { reports, next_page, last_page } }) => {
+const Report: React.FC<Props> = ({
+	data: { reports, next_page, last_page },
+}) => {
 	const [show, setShow] = useState<boolean>(false);
+	const [showChat, setShowChat] = useState<boolean>(false);
 	const [session, setSession] = useState<ReportDetails | null>(null);
+	const [chatData, setChatData] = useState<Chat[]>([]);
 	const [data, setData] = useState<Session[]>(reports);
 	const [currentPage, setCurrentPage] = useState(next_page || 0);
 
@@ -49,7 +54,7 @@ const Report: React.FC<Props> = ({ data: { reports, next_page, last_page } }) =>
 			setSession({
 				...report,
 				sessionDuration: report.endedAt
-					? `${Math.ceil((report.endedAt - report.startedAt ) / 60000)}m`
+					? `${Math.ceil((report.endedAt - report.startedAt) / 60000)}m`
 					: "ongoing",
 				sessionStartedAt: Intl.DateTimeFormat("en-US", {
 					month: "numeric",
@@ -60,15 +65,22 @@ const Report: React.FC<Props> = ({ data: { reports, next_page, last_page } }) =>
 					hour12: true,
 				}).format(report.startedAt),
 				escalation: report.escalation ? "Yes" : "No",
-        totalMessages: report.messages.length,
+				totalMessages: report.messages.length,
 			});
 		}
 	};
-  
+
+	const handleChatReport = (report: Session) => {
+		if (report) {
+			setShowChat(true);
+			setChatData(report.messages);
+		}
+	};
 
 	return (
 		<div className="mt-8 flow-root">
 			<ReportDetailsModal show={show} setShow={setShow} data={session} />
+			<ChatDetailsModal showChat={showChat} setShowChat={setShowChat} data={chatData} />
 
 			<div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
 				<div className="inline-block min-w-full py-2 align-middle">
@@ -101,7 +113,9 @@ const Report: React.FC<Props> = ({ data: { reports, next_page, last_page } }) =>
 									</td>
 									<td className="whitespace-nowrap text-center px-3 py-4 text-sm">
 										{report.endedAt ? (
-											`${Math.ceil((report.endedAt - report.startedAt)/ 60000)}m`
+											`${Math.ceil(
+												(report.endedAt - report.startedAt) / 60000
+											)}m`
 										) : (
 											<span className="flex justify-center">
 												<Active />
@@ -110,7 +124,13 @@ const Report: React.FC<Props> = ({ data: { reports, next_page, last_page } }) =>
 										)}
 									</td>
 									<td className="whitespace-nowrap text-center px-3 py-4 text-sm">
-										{report.messages.length}
+										{report.messages.length}{" "}
+										<span
+											onClick={() => handleChatReport(report)}
+											className="underline cursor-pointer"
+										>
+											See chats
+										</span>
 									</td>
 									<td className="whitespace-nowrap text-center px-3 py-4 text-sm">
 										{report.escalation ? "Yes" : "No"}

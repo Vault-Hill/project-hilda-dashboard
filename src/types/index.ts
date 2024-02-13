@@ -21,7 +21,7 @@ export type Session = {
   escalation: string | boolean;
   startedAt: number;
   endedAt: number;
-  messages: Record<string, string>[]
+  messages: Chat[]
 };
 
 export type ReportDetails = {
@@ -33,4 +33,10 @@ export type ReportDetails = {
   sessionStartedAt: string;
   sessionDuration: string;
   totalMessages: number;
+}
+
+export type Chat = {
+  role: string;
+  content: string
+  _id: string;
 }

@@ -47,7 +47,7 @@ const TextArea: React.FC<TextAreaProps> = ({
       'focus:outline-0',
       'focus:ring-0',
       'disabled:opacity-50',
-      'dark:bg-[#0F0F0F] bg-white border-[0.5px] border-[#00000030]',
+      'dark:bg-[#FFFF] bg-white border-[0.5px] border-[#00000030]',
       'h-40 w-full',
 
     ],

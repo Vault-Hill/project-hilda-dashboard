@@ -121,3 +121,7 @@ body {
     -webkit-text-fill-color: transparent;
   
 }
+
+.user-message-gradient {
+	background: linear-gradient(15deg, #fb907f 20%, #fb7fe0 51%, #b39ae8 100%);
+}

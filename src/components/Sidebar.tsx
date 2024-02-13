@@ -6,7 +6,7 @@ type Props = {
 };
 const SideNav: React.FC<Props> = ({ navItems }) => {
   return (
-    <div className='dark:bg-[#0D0D0D] bg-[#F0F0F0] px-16 md:h-full row-span-3 py-5 fixed w-full md:w-auto bottom-0  z-50 md:relative border-r dark:border-r-[#ffffff] border-r-[#0000002a]'>
+    <div className='dark:bg-[#0D0D0D] bg-[#F0F0F0] px-10 md:h-full row-span-3 py-5 fixed w-full md:w-auto bottom-0  z-50 md:relative border-r dark:border-r-[#ffffff] border-r-[#0000002a]'>
       <p className='py-7 text-2xl dark:text-white text-black mb-7 md:block hidden prototype'>Hilda</p>
 
       <nav className='flex md:flex-col justify-around md:justify-normal gap-5 dark:text-neutral-400 text-neutral-600'>

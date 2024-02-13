@@ -8,7 +8,7 @@ type InputProps = {
   label?: string;
   required?: boolean;
   placeholder?: string;
-  type?: 'text' | 'password' | 'number' | 'time' | 'email' | 'hidden';
+  type?: 'text' | 'password' | 'number' | 'time' | 'email' | 'hidden' | 'url';
   optional?: boolean;
   validation?: RegisterOptions;
   detached?: boolean;

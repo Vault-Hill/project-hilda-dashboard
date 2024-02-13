@@ -1,6 +1,7 @@
 import {
 	ClipboardDocumentListIcon,
 	Cog8ToothIcon,
+	LightBulbIcon,
 	UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
@@ -38,6 +39,11 @@ const navItems: NavItem[] = [
 		title: "Reports",
 		path: "/reports",
 		icon: ClipboardDocumentListIcon,
+	},
+	{
+		title: "Training",
+		path: "/training",
+		icon: LightBulbIcon,
 	},
 	{
 		title: "Settings",
