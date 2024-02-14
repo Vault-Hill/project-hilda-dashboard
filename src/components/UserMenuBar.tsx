@@ -52,7 +52,7 @@ const UserMenuBar: React.FC<Props> = ({ menuItems }) => {
                                 navigate("/login");
                               }}
                               className={classNames(
-                                active ? "text-yellow-400" : "",
+                                active ? "gradient-text" : "",
                                 "block px-4 py-2 text-sm"
                               )}
                             >
@@ -64,7 +64,7 @@ const UserMenuBar: React.FC<Props> = ({ menuItems }) => {
                           <a
                             href={subItem.path}
                             className={classNames(
-                              active ? "text-yellow-400" : "",
+                              active ? "gradient-text" : "",
                               "block px-4 py-2 text-sm"
                             )}
                           >
